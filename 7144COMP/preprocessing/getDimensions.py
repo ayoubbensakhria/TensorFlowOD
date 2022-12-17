@@ -1,8 +1,5 @@
-# based on https://github.com/datitran/raccoon_dataset/blob/master/xml_to_csv.py
-
 import os
 import glob #<- search files and folders in a path
-import seaborn as sns
 import pandas as pd
 import argparse
 import xml.etree.ElementTree as ET
