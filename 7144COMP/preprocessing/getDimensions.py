@@ -17,23 +17,21 @@ def get_dimensions(path, extension='jpg'):
     -------
     two lists of heights and widths
     """
-
-    height_list = []
-    width_list = []
+    # list of tuples containing heights and widths
+    hw_pairs = []
     # Search recursively in subdirectories
     for jpg_file in glob.glob(path + '/*.{ext}'.format(ext=extension), recursive=True):
         try:
             img = imread(jpg_file)
             height,width,color = img.shape
             if height is not None and width is not None:
-                height_list.append(height)
-                width_list.append(width)
+                hw_pairs.append((height,width))
             else:
                 continue
         except:
             print('An arror occured with the file:', jpeg_file)
             continue
-    return height_list, width_list
+    return hw_pairs
 
 
 def main():
@@ -46,7 +44,7 @@ def main():
                         type=str)
     parser.add_argument("-o",
                     "--output",
-                    help="Output: two lists of dimensions")
+                    help="Output: list of dimension tuples")
     parser.add_argument("-ex",
                         "--extension",
                         help="Image extension",
@@ -58,10 +56,8 @@ def main():
 
     assert(os.path.isdir(args.inputDir))
     
-    dimensions = get_dimensions(args.inputDir, args.extension)
+    args.output = get_dimensions(args.inputDir, args.extension)
     print('Done fetching images from :', args.inputDir)
-    return dimensions
-
 
 
 if __name__ == '__main__':
