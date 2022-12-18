@@ -1,12 +1,11 @@
 import os
 import glob #<- search files and folders in a path
-import pandas as pd
 import argparse
 import xml.etree.ElementTree as ET
 from matplotlib.pyplot import imread
 
 
-def get_dimensions(path, extension='jpg'):
+def get_dimensions(path, extension="jpg"):
     """Iterates through all .jpg files in all subdirectories.
 
     Parameters:
@@ -19,20 +18,21 @@ def get_dimensions(path, extension='jpg'):
     """
     # list of tuples containing heights and widths
     hw_pairs = []
+    counter = 0
     # Search recursively in subdirectories
-    for jpg_file in glob.glob(path + '/*.{ext}'.format(ext=extension), recursive=True):
+    for jpg_file in glob.glob(path + '/**/*.{ext}'.format(ext=extension), recursive=True):
         try:
             img = imread(jpg_file)
-            print(img)
             height,width,color = img.shape
             if height is not None and width is not None:
                 hw_pairs.append((height,width))
+                counter += 1
             else:
                 continue
         except:
             print('An arror occured with the file:', jpeg_file)
             continue
-    return hw_pairs
+    return hw_pairs, counter
 
 
 def main():
@@ -49,6 +49,7 @@ def main():
     parser.add_argument("-ex",
                         "--extension",
                         help="Image extension",
+                        default="jpg",
                         type=str)
     args = parser.parse_args()
 
@@ -56,9 +57,8 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    
-    args.output = get_dimensions(args.inputDir, args.extension)
-    print('Done fetching images from :', args.inputDir)
+    args.output, counter = get_dimensions(args.inputDir, args.extension)
+    print('Done fetching', counter, args.extension, 'image(s) from :', args.inputDir)
 
 
 if __name__ == '__main__':
