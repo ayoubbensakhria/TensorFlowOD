@@ -44,6 +44,9 @@ def main():
                         "--inputDir",
                         help="Root path to the folder where the input image files are stored",
                         type=str)
+    parser.add_argument("-o",
+                    "--output",
+                    help="Output: two lists of dimensions")
     parser.add_argument("-ex",
                         "--extension",
                         help="Image extension",
