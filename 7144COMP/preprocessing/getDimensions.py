@@ -23,9 +23,9 @@ def get_dimensions(path, extension='jpg'):
     for jpg_file in glob.glob(path + '/*.{ext}'.format(ext=extension), recursive=True):
         try:
             img = imread(jpg_file)
+            print(img)
             height,width,color = img.shape
             if height is not None and width is not None:
-                print(height,width)
                 hw_pairs.append((height,width))
             else:
                 continue
