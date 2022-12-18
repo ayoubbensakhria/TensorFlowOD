@@ -25,6 +25,7 @@ def get_dimensions(path, extension='jpg'):
             img = imread(jpg_file)
             height,width,color = img.shape
             if height is not None and width is not None:
+                print(height,width)
                 hw_pairs.append((height,width))
             else:
                 continue
