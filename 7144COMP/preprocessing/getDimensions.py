@@ -18,7 +18,6 @@ def get_dimensions(path, extension="jpg"):
     """
     # list of tuples containing heights and widths
     hw_pairs = []
-    counter = 0
     # Search recursively in subdirectories
     for jpg_file in glob.glob(path + '/**/*.{ext}'.format(ext=extension), recursive=True):
         try:
@@ -26,13 +25,12 @@ def get_dimensions(path, extension="jpg"):
             height,width,color = img.shape
             if height is not None and width is not None:
                 hw_pairs.append((height,width))
-                counter += 1
             else:
                 continue
         except:
             print('An arror occured with the file:', jpeg_file)
             continue
-    return hw_pairs, counter
+    return hw_pairs
 
 
 def main():
@@ -57,8 +55,8 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    args.output, counter = get_dimensions(args.inputDir, args.extension)
-    print('Done fetching', counter, args.extension, 'image(s) from :', args.inputDir)
+    args.output = get_dimensions(args.inputDir, args.extension)
+    print('Done fetching', len(args.output), args.extension, 'file(s) from :', args.inputDir)
 
 
 if __name__ == '__main__':
