@@ -25,16 +25,17 @@ def get_dimensions(path, extension="jpg"):
         try:
             img = imread(jpg_file)
             # get current folder
-            current_folder = os.path.dirname(jpg_file)
+            current_folder = os.path.basename(os.path.dirname(jpg_file))
             # check if xml with the same filename exists
-            annotated = 1 if os.path.exists(os.path.splitext(jpg_file)[0] + '.xml') else 0
+            xml_filename = os.path.splitext(jpg_file)[0] + '.xml'
+            annotated = 1 if os.path.exists(xml_filename) else 0
             # get height and width
             height, width, _ = img.shape
             # update annotation count
             if current_folder in annotation_count:
-                current_folder[current_folder] += annotated
+                annotation_count[current_folder] += annotated
             else:
-                current_folder[current_folder] = annotated
+                annotation_count[current_folder] = annotated
             # check class
             if height is not None and width is not None:
                 hw_pairs.append((height,width))
