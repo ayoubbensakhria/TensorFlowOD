@@ -57,6 +57,7 @@ def main():
     assert(os.path.isdir(args.inputDir))
     args.output = get_dimensions(args.inputDir, args.extension)
     print('Done fetching', len(args.output), args.extension, 'file(s) from :', args.inputDir)
+    return args.output
 
 
 if __name__ == '__main__':
