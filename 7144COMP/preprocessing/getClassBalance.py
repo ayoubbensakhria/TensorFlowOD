@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 from matplotlib.pyplot import imread
 
 
-def get_dimensions(path, extension="jpg"):
-    """Iterates through all .jpg files in all subdirectories.
+def get_balance(path, extension="jpg"):
+    """Iterates through all .jpg and .xml files in all subdirectories.
 
     Parameters:
     ----------
@@ -53,7 +53,7 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    return get_dimensions(args.inputDir, args.extension)
+    get_dimensions(args.inputDir, args.extension)
 
 if __name__ == '__main__':
     main()
