@@ -31,7 +31,6 @@ def get_dimensions(path, extension="jpg"):
             print('An arror occured with the file:', jpeg_file)
             continue
     print(hw_pairs)
-    return hw_pairs
 
 
 def main():
@@ -53,7 +52,7 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    return get_dimensions(args.inputDir, args.extension)
+    get_dimensions(args.inputDir, args.extension)
 
 if __name__ == '__main__':
     main()
