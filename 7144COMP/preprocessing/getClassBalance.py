@@ -31,8 +31,6 @@ def get_balance(path, extension="jpg"):
             print('An arror occured with the file:', jpeg_file)
             continue
     print(hw_pairs)
-    return hw_pairs
-
 
 def main():
     # Initiate argument parser
