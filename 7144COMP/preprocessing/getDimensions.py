@@ -52,7 +52,7 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    return get_dimensions(args.inputDir, args.extension)
+    print (get_dimensions(args.inputDir, args.extension))
 
 if __name__ == '__main__':
     main()
