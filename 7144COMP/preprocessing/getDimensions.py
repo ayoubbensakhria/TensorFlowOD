@@ -30,8 +30,7 @@ def get_dimensions(path, extension="jpg"):
         except:
             print('An arror occured with the file:', jpeg_file)
             continue
-    return hw_pairs
-
+    print (hw_pairs)
 
 def main():
     # Initiate argument parser
@@ -52,7 +51,7 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    print (get_dimensions(args.inputDir, args.extension))
+    get_dimensions(args.inputDir, args.extension)
 
 if __name__ == '__main__':
     main()
