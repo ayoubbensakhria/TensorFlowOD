@@ -30,7 +30,6 @@ def get_dimensions(path, extension="jpg"):
         except:
             print('An arror occured with the file:', jpeg_file)
             continue
-    print ('Done fetching ', len(hw_pairs), extension, 'file(s)')
     return hw_pairs
 
 
@@ -42,10 +41,6 @@ def main():
                         "--inputDir",
                         help="Root path to the folder where the input image files are stored",
                         type=str)
-    parser.add_argument("-o",
-                        "--output",
-                        help="Output: a list of tuples containing heights and widths",
-                        type=list)
     parser.add_argument("-ex",
                         "--extension",
                         help="Image extension",
@@ -57,10 +52,7 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    args.output = get_dimensions(args.inputDir, args.extension)
-    print(args.output)
-    return args.output
-
+    return get_dimensions(args.inputDir, args.extension)
 
 if __name__ == '__main__':
     main()
