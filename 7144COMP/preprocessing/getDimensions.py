@@ -42,7 +42,10 @@ def main():
                         "--inputDir",
                         help="Root path to the folder where the input image files are stored",
                         type=str)
-
+    parser.add_argument("-o",
+                        "--output",
+                        help="Output: a list of tuples containing heights and widths",
+                        type=list)
     parser.add_argument("-ex",
                         "--extension",
                         help="Image extension",
@@ -54,7 +57,9 @@ def main():
         args.inputDir = os.getcwd()
 
     assert(os.path.isdir(args.inputDir))
-    return get_dimensions(args.inputDir, args.extension)
+    args.output = get_dimensions(args.inputDir, args.extension)
+    print(args.output)
+    return args.output
 
 
 if __name__ == '__main__':
