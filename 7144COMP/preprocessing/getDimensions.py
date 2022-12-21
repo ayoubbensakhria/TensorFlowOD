@@ -23,9 +23,12 @@ def get_dimensions(path, extension="jpg"):
     # Search recursively in subdirectories
     for jpg_file in glob.glob(path + '/**/*.{ext}'.format(ext=extension), recursive=True):
         try:
-            img = imread(jpg_file)
             # get current folder
             current_folder = os.path.basename(os.path.dirname(jpg_file))
+            # Exclude train, test, valid
+            if current_folder in ['train', 'test', 'valid']:
+                continue
+            img = imread(jpg_file)
             # check if xml with the same filename exists
             xml_filename = os.path.splitext(jpg_file)[0] + '.xml'
             annotated = 1 if os.path.exists(xml_filename) else 0
